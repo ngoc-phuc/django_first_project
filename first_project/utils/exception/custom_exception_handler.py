@@ -17,15 +17,12 @@ def custom_exception_handler(exc, context):
             response.data['code'] = 400
 
         else:
-            response.status_code = 400
+            response.status_code = 500
             response.data['message'] = 'An error occurred on the server, please try again!'
-            response.data['code'] = 400
+            response.data['code'] = 500
     
-    if response.status_code == 400:
-        response.data['message'] = 'An error occurred on the server, please try again!'
-        response.data['code'] = 400
-    else:
-        response.data['message'] = str(exc)
-        response.data['code'] = response.status_code
+    response.data['message'] = str(exc)
+    response.data['code'] = response.status_code
+        
     
     return response
